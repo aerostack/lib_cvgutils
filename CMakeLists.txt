@@ -7,7 +7,9 @@ project(${PROJECT_NAME})
 #see: http://stackoverflow.com/questions/10851247/how-to-activate-c-11-in-cmake
 #see: http://stackoverflow.com/questions/10984442/how-to-detect-c11-support-of-a-compiler-with-cmake
 
-add_definitions(-std=c++17)
+# add_definitions(-std=c++17)
+set(CMAKE_CXX_STANDARD 11)
+
 
 
 # Set the build type.  Options are:
