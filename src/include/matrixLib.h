@@ -23,20 +23,17 @@
 *
 ****************************************/
 
-#ifndef _MATRIX_LIB_H
-#define _MATRIX_LIB_H
+#ifndef _MATRIX_LIB_H__
+#define _MATRIX_LIB_H__
 
 
 #include <math.h>
 #include <stdio.h>
 
-//#include <opencv/cv.h>		// changed to make it work with ubuntu 12.04 opencv software center installaion
-//#include <opencv/cxcore.h>	// changed to make it work with ubuntu 12.04 opencv software center installaion
-//#include <opencv2/opencv.hpp>
-//#include "highgui.h"
-
+#include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
 #include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O
+
 
 namespace CVG {
 class Vector;
@@ -161,10 +158,7 @@ class Vector : public Matrix
 		}
 		/* END: ***** Funciones aniadidas por Jesus ***** */
 };
-}
 
-
-
-
+} //namespace
 
 #endif

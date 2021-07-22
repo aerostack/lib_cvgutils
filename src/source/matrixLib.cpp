@@ -264,35 +264,37 @@ int Matrix::multiplication(Matrix* matA, Matrix* matB, Matrix* matC)
 
 
 
+
 int Matrix::pseudoinverse(Matrix* matA)
 {
 	//Comprobaciones previas
 	//To do
 	//Pinv calulation
-	CvMat* pinvAux=cvCreateMat(Matrix::numFilas,Matrix::numColumnas,CV_32FC1);
-	CvMat* sourceAux=cvCreateMat(Matrix::numFilas,Matrix::numColumnas,CV_32FC1);
+	
+	cv::Mat pinvAux = cv::Mat_<float>(Matrix::numFilas,Matrix::numColumnas,CV_32FC1);
+	cv::Mat sourceAux  = cv::Mat_<float>(Matrix::numFilas,Matrix::numColumnas,CV_32FC1);
 	for(int fila=1;fila<=numFilas;fila++)
 	{
 		for(int columna=1;columna<=numColumnas;columna++)
 		{
 			//printf("%f\n",sourceAux->data.fl[1]);
-			sourceAux->data.fl[(fila-1)*numColumnas+columna-1]=matA->getValueData(fila,columna);
+			sourceAux.at<float>(fila-1,columna-1)= (float)matA->getValueData(fila,columna);
 			//printf("%f\n",sourceAux->data.fl[(fila-1)*numColumnas+columna-1]);
 		}
 	}
-    cvInvert(sourceAux,pinvAux,CV_SVD);
+	
+    cv::invert(sourceAux,pinvAux,cv::DECOMP_SVD);
 	for(int fila=1;fila<=numFilas;fila++)
 	{
 		for(int columna=1;columna<=numColumnas;columna++)
 		{
-			Matrix::setValueData(pinvAux->data.fl[(fila-1)*numColumnas+columna-1],fila,columna);
+			Matrix::setValueData(pinvAux.at<float>(fila-1,columna-1),fila,columna);
 		}
 	}
 
 	//End
 	return 1;
 }
-
 
 
 
@@ -337,6 +339,7 @@ float Vector::getValueData(int numFilaIn) const
 {
 	return Matrix::getValueData(numFilaIn,1);
 }
+
 
 
 int Vector::copy(const Vector* matrixOriginal)
