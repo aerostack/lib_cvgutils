@@ -72,7 +72,10 @@ set(CVGUTILSLIB_SOURCE_FILES
 
 find_package(catkin REQUIRED
                 COMPONENTS roscpp pugixml)
-find_package(OpenCV 4 REQUIRED)
+find_package(OpenCV 4 QUIET)
+if(NOT OpenCV_FOUND)
+	find_package(OpenCV 3 REQUIRED)
+endif()
 
 catkin_package(
 	INCLUDE_DIRS ${CVGUTILSLIB_INCLUDE_DIR}
